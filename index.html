@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jadwal Kuliah — susun jadwal mingguan, deteksi bentrok</title>
+<meta name="description" content="Susun jadwal kuliah mingguan dan ketahui bentrok jam atau ruang sebelum semester jalan. Hitung total SKS otomatis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&family=Newsreader:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+
+  <header class="masthead">
+    <div>
+      <p class="masthead__kicker">Semester ini</p>
+      <h1>Jadwal Kuliah</h1>
+    </div>
+    <div class="masthead__meta">
+      <div>
+        <p class="meta__k">Mata kuliah</p>
+        <p class="meta__v" id="stat-mk">0</p>
+      </div>
+      <div>
+        <p class="meta__k">Total SKS</p>
+        <p class="meta__v" id="stat-sks">0</p>
+      </div>
+      <div>
+        <p class="meta__k">Bentrok</p>
+        <p class="meta__v" id="stat-bentrok">0</p>
+      </div>
+    </div>
+  </header>
+
+  <p class="ringkas" id="ringkas"></p>
+
+  <div class="dua">
+
+    <!-- ---------- form ---------- -->
+    <section class="panel">
+      <h2>Tambah mata kuliah</h2>
+      <p class="panel__ket">Bentrok jam dan ruang diperiksa saat kamu menekan simpan.</p>
+
+      <form id="form" novalidate>
+        <div class="field">
+          <label for="mk">Mata kuliah</label>
+          <input id="mk" type="text" placeholder="Basis Data" autocomplete="off" required>
+        </div>
+        <div class="baris2">
+          <div class="field">
+            <label for="ruang">Ruang</label>
+            <input id="ruang" type="text" placeholder="Lab 2" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sks">SKS</label>
+            <input id="sks" type="number" min="1" max="6" step="1" value="3" inputmode="numeric">
+          </div>
+        </div>
+        <div class="field">
+          <label for="hari">Hari</label>
+          <select id="hari">
+            <option value="0">Senin</option>
+            <option value="1">Selasa</option>
+            <option value="2">Rabu</option>
+            <option value="3">Kamis</option>
+            <option value="4">Jumat</option>
+            <option value="5">Sabtu</option>
+          </select>
+        </div>
+        <div class="baris2">
+          <div class="field">
+            <label for="mulai">Mulai</label>
+            <input id="mulai" type="time" value="08:00" step="300" required>
+          </div>
+          <div class="field">
+            <label for="selesai">Selesai</label>
+            <input id="selesai" type="time" value="09:40" step="300" required>
+          </div>
+        </div>
+        <button class="btn" type="submit">Simpan ke jadwal</button>
+        <p class="pesan" id="pesan" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- ---------- jadwal ---------- -->
+    <div>
+      <div id="bentrok" class="bentrok" hidden></div>
+
+      <div class="tabel" aria-hidden="false">
+        <div class="tabel__kepala">
+          <span></span>
+          <span>Senin</span><span>Selasa</span><span>Rabu</span>
+          <span>Kamis</span><span>Jumat</span><span>Sabtu</span>
+        </div>
+        <div class="tabel__badan" id="badan">
+          <div class="rail" id="rail"></div>
+          <!-- kolom hari disisipkan lewat JS -->
+        </div>
+      </div>
+
+      <div class="agenda" id="agenda"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>Data tersimpan di perangkat ini. Tidak ada yang dikirim ke server.</span>
+    <span>Arahkan kursor ke blok untuk menghapus.</span>
+  </footer>
+
+</div>
+<script src="app.js" defer></script>
+</body>
+</html>
