@@ -1,53 +1,49 @@
+<div align="center">
+
 # Jadwal Kuliah
 
-Susun jadwal kuliah mingguan, dan **ketahui bentroknya sebelum semester jalan**.
+**Grid jadwal mingguan dengan deteksi bentrok jam dan ruang.**
 
-## Masalah yang diselesaikan
+[![Demo](https://img.shields.io/badge/demo-live-b45309?style=flat-square)](https://atmajadesna.github.io/jadwal-kuliah/)
+![Tanpa build step](https://img.shields.io/badge/build-tanpa%20build%20step-2f6f4f?style=flat-square)
+![Lisensi MIT](https://img.shields.io/badge/lisensi-MIT-1f4e79?style=flat-square)
 
-Jadwal dari bagian akademik biasanya berupa tabel statis. Bentrok jam dan ruang
-baru ketahuan saat hari pertama kuliah, atau saat dua mata kuliah ternyata
-memakai lab yang sama pada jam yang sama.
+<a href="https://atmajadesna.github.io/jadwal-kuliah/"><img src="docs/screenshot.jpg" alt="Tangkapan layar Jadwal Kuliah" width="100%"></a>
 
-Aplikasi ini memeriksa bentrok **saat kamu memasukkan jadwal**, bukan nanti.
+</div>
 
-## Cara kerja
+## Masalahnya
 
-- Setiap mata kuliah disimpan sebagai menit sejak 00.00, jadi pengecekan bentrok
-  cukup aritmetika: dua blok bertabrakan bila `a.mulai < b.selesai && b.mulai < a.selesai`
-  pada hari yang sama.
-- Kalau ruangnya juga sama, peringatan menyebutkan ruangnya secara eksplisit.
-- Blok yang bertabrakan diberi tanda merah di grid, dan jumlah bentrok muncul di
-  kepala halaman.
-- Total SKS dihitung otomatis.
+Jadwal kampus sering bentrok tanpa disadari — dua mata kuliah di jam yang sama, atau dua kelas memakai satu ruang. Ketahuan belakangan, saat sudah terlambat.
 
-## Fitur
+## Yang menarik di dalamnya
 
-- Grid mingguan Senin–Sabtu, pukul 07.00–21.00.
-- Deteksi bentrok jam **dan** ruang, ditampilkan sebagai daftar, bukan cuma warna.
-- Total SKS dan jumlah mata kuliah di kepala halaman.
-- Hapus mata kuliah langsung dari blok jadwal (tombol × muncul saat kursor di atas blok).
-- Di layar sempit, grid berubah menjadi agenda per hari — tanpa perlu digeser ke samping.
-- Tersimpan di `localStorage`.
+**Deteksi bentrok** — Dua blok bentrok kalau harinya sama dan rentang jamnya beririsan: `a.mulai < b.selesai && b.mulai < a.selesai`.
+**Ruang ikut dicek** — Bentrok dilaporkan beserta nama ruangnya, bukan cuma "ada bentrok".
+**Total SKS otomatis** — SKS dijumlah dari mata kuliah yang aktif.
+**Responsif** — Di layar sempit, grid berubah jadi agenda per hari.
 
-## Struktur berkas
+## Jalanin
 
-| Berkas | Isi |
-|---|---|
-| `index.html` | kepala halaman, formulir, wadah grid |
-| `tokens.css` | token warna, huruf, jarak, tinggi baris jam |
-| `styles.css` | grid, blok jadwal, agenda versi sempit |
-| `app.js` | model waktu, deteksi bentrok, render |
+Buka `index.html` di browser.
 
-Tanpa dependensi, tanpa build step.
+```bash
+python3 -m http.server 8000
+```
 
-## Batasan
+Tidak ada dependency, tidak ada build step. Semua jalan di browser.
 
-- Satu mata kuliah = satu blok waktu. Kelas dengan dua sesi per minggu harus
-  ditambahkan dua kali.
-- Belum ada mode "minggu ganjil/genap".
-- Belum ada ekspor ke kalender (.ics) — kandidat pengembangan berikutnya.
-- Tidak ada sinkronisasi antar perangkat.
+## Struktur
 
-## Lisensi
+```
+index.html    tampilan dan struktur halaman
+app.js        seluruh logika: data, hitungan, penyimpanan
+styles.css    tata letak dan komponen
+tokens.css    warna, ukuran teks, dan spasi sebagai variabel
+```
 
-MIT.
+## Catatan
+
+Data jadwal disimpan di `localStorage`, jadi tetap ada setelah halaman ditutup.
+
+Dibuat dengan JavaScript, CSS Grid, HTML, tanpa framework.
