@@ -2,7 +2,7 @@
 
 # Jadwal Kuliah
 
-**Grid jadwal mingguan dengan deteksi bentrok jam dan ruang.**
+**Grid jadwal mingguan dengan pendeteksian benturan jam dan ruang.**
 
 [![Demo](https://img.shields.io/badge/demo-live-b45309?style=flat-square)](https://atmajadesna.github.io/jadwal-kuliah/)
 ![Tanpa build step](https://img.shields.io/badge/build-tanpa%20build%20step-2f6f4f?style=flat-square)
@@ -12,38 +12,41 @@
 
 </div>
 
-## Masalahnya
+## Latar Belakang
 
-Jadwal kampus sering bentrok tanpa disadari — dua mata kuliah di jam yang sama, atau dua kelas memakai satu ruang. Ketahuan belakangan, saat sudah terlambat.
+Benturan jadwal kuliah sering tidak disadari: dua mata kuliah pada jam yang sama, atau dua kelas menggunakan satu ruang. Benturan umumnya diketahui setelah perkuliahan berjalan.
 
-## Yang menarik di dalamnya
+## Poin Teknis
 
-**Deteksi bentrok** — Dua blok bentrok kalau harinya sama dan rentang jamnya beririsan: `a.mulai < b.selesai && b.mulai < a.selesai`.
-**Ruang ikut dicek** — Bentrok dilaporkan beserta nama ruangnya, bukan cuma "ada bentrok".
-**Total SKS otomatis** — SKS dijumlah dari mata kuliah yang aktif.
-**Responsif** — Di layar sempit, grid berubah jadi agenda per hari.
+**Pendeteksian benturan.** Dua blok dinyatakan bertabrakan apabila berada pada hari yang sama dan rentang jamnya beririsan: `a.mulai < b.selesai && b.mulai < a.selesai`.
 
-## Jalanin
+**Ruang turut diperiksa.** Benturan dilaporkan beserta nama ruang, tidak sekadar menandai adanya benturan.
 
-Buka `index.html` di browser.
+**Total SKS otomatis.** Jumlah SKS dihitung dari mata kuliah yang aktif.
+
+**Tata letak responsif.** Pada layar sempit, grid berubah menjadi agenda harian.
+
+## Menjalankan
+
+Berkas `index.html` dapat dibuka langsung pada peramban:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Tidak ada dependency, tidak ada build step. Semua jalan di browser.
+Tidak diperlukan dependensi maupun proses build. Seluruh proses berjalan pada peramban.
 
-## Struktur
+## Struktur Berkas
 
 ```
-index.html    tampilan dan struktur halaman
-app.js        seluruh logika: data, hitungan, penyimpanan
-styles.css    tata letak dan komponen
+index.html    struktur halaman dan tampilan
+app.js        seluruh logika: data, perhitungan, dan penyimpanan
+styles.css    tata letak dan komponen antarmuka
 tokens.css    warna, ukuran teks, dan spasi sebagai variabel
 ```
 
 ## Catatan
 
-Data jadwal disimpan di `localStorage`, jadi tetap ada setelah halaman ditutup.
+Data jadwal disimpan pada `localStorage`, sehingga tetap tersedia setelah halaman ditutup.
 
-Dibuat dengan JavaScript, CSS Grid, HTML, tanpa framework.
+Dibangun menggunakan JavaScript, CSS Grid, dan HTML, tanpa kerangka kerja.
