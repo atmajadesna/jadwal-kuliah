@@ -1,52 +1,35 @@
-<div align="center">
-
 # Jadwal Kuliah
 
-**Grid jadwal mingguan dengan pendeteksian benturan jam dan ruang.**
+A weekly class planner with time-overlap detection, room conflict information, and automatic credit totals.
 
-[![Demo](https://img.shields.io/badge/demo-live-b45309?style=flat-square)](https://atmajadesna.github.io/jadwal-kuliah/)
-![Tanpa build step](https://img.shields.io/badge/build-tanpa%20build%20step-2f6f4f?style=flat-square)
-![Lisensi MIT](https://img.shields.io/badge/lisensi-MIT-1f4e79?style=flat-square)
+[Open demo](https://atmajadesna.github.io/jadwal-kuliah/)
 
-<a href="https://atmajadesna.github.io/jadwal-kuliah/"><img src="docs/screenshot.jpg" alt="Tangkapan layar Jadwal Kuliah" width="100%"></a>
+![Weekly planner](docs/screenshot.jpg)
 
-</div>
+## Features
 
-## Latar Belakang
+- Class entry with day, room, time range, and credits.
+- Weekly timetable with a compact agenda on narrow screens.
+- Overlap detection using `a.start < b.end && b.start < a.end` on the same day.
+- Schedule data persisted in local browser storage.
+- Keyboard focus, readable form labels, and reduced-motion refinements.
 
-Benturan jadwal kuliah sering tidak disadari: dua mata kuliah pada jam yang sama, atau dua kelas menggunakan satu ruang. Benturan umumnya diketahui setelah perkuliahan berjalan.
-
-## Poin Teknis
-
-**Pendeteksian benturan.** Dua blok dinyatakan bertabrakan apabila berada pada hari yang sama dan rentang jamnya beririsan: `a.mulai < b.selesai && b.mulai < a.selesai`.
-
-**Ruang turut diperiksa.** Benturan dilaporkan beserta nama ruang, tidak sekadar menandai adanya benturan.
-
-**Total SKS otomatis.** Jumlah SKS dihitung dari mata kuliah yang aktif.
-
-**Tata letak responsif.** Pada layar sempit, grid berubah menjadi agenda harian.
-
-## Menjalankan
-
-Berkas `index.html` dapat dibuka langsung pada peramban:
+## Run locally
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Tidak diperlukan dependensi maupun proses build. Seluruh proses berjalan pada peramban.
+Open `http://localhost:8000`. No build step is required. Fonts use Google Fonts.
 
-## Struktur Berkas
+## Files
 
-```
-index.html    struktur halaman dan tampilan
-app.js        seluruh logika: data, perhitungan, dan penyimpanan
-styles.css    tata letak dan komponen antarmuka
-tokens.css    warna, ukuran teks, dan spasi sebagai variabel
-```
+`index.html` contains the interface, `app.js` manages schedule state and calculations, `styles.css` and `refinement.css` define the responsive components, and `tokens.css` supplies shared design variables.
 
-## Catatan
+## Limitations
 
-Data jadwal disimpan pada `localStorage`, sehingga tetap tersedia setelah halaman ditutup.
+This is a personal planning prototype, not an authoritative university registration system. Data is local to the browser and may be lost when storage is cleared. There is no account synchronization or server backup. Verify schedules against official course information.
 
-Dibangun menggunakan JavaScript, CSS Grid, dan HTML, tanpa kerangka kerja.
+## License
+
+See [LICENSE](LICENSE).

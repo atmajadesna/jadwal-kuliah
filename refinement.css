@@ -1,0 +1,9 @@
+/* Weekly planner: keep the warm editorial identity, improve input hierarchy. */
+html,body { overflow-x:clip; }
+h1,h2,h3 {font-style:normal;overflow-wrap:anywhere}
+:focus-visible {outline:3px solid var(--color-focus);outline-offset:3px}
+button,input,select {min-height:44px}
+.field label {font-size:var(--text-sm);letter-spacing:0;text-transform:none}
+.panel {min-width:0}
+input,select {font-size:1rem}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
