@@ -49,7 +49,11 @@
       const raw = localStorage.getItem(STORE);
       if (!raw) return;
       const parsed = JSON.parse(raw);
-      if (parsed && Array.isArray(parsed.kuliah)) state = parsed;
+      if (parsed && Array.isArray(parsed.kuliah)) {
+        state = parsed;
+        // lanjutkan penomoran dari id tertinggi supaya tidak ada id kembar setelah reload
+        seq = state.kuliah.reduce((n, k) => Math.max(n, Number(k.id) || 0), 50);
+      }
     } catch { /* pakai bawaan */ }
   }
 
